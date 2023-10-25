@@ -21,3 +21,6 @@ continuous action (DeepMind Control Suite) domains, consistently improving their
 "Your assumptions are your windows on the world. Scrub
 them off every once in a while, or the light won’t come in.”
 –Isaac Asimov
+
+# Useful links
+* Dopamine Notebooks: https://github.com/google/dopamine/tree/master/dopamine/colab
