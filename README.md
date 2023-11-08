@@ -31,9 +31,11 @@ them off every once in a while, or the light won’t come in.”
 In dopamine_restart/dopamine/discrete_domains/atari_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
 
 Code:
+```ruby
   def reset_last_layer(self):
         """Reset the last layer of the network."""
         self.dense2 = tf.keras.layers.Dense(self.num_actions, name='fully_connected')
+```
         
 # Second Step     
 Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine
