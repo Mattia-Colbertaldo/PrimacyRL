@@ -39,7 +39,9 @@ Code:
 Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine
 
 Code:
+```ruby
   !git clone https://github.com//Mattia-Colbertaldo/dopamine_restart
+```
 
 # Third Step
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
