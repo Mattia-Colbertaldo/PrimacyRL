@@ -62,7 +62,7 @@ Code:
 
 In this way we reset the last layers every 25 iterations.
 
-# Forth Step
+# Fourth Step
 
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", define ResetLastLayers: it calls reset_last_layer for both online_convnet and target_convnet networks
 
