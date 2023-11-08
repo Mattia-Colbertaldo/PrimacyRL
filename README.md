@@ -41,11 +41,18 @@ Code:
 ```
         
 # Second Step     
-Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine
+Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine:
 
 Code:
 ```ruby
   !git clone https://github.com//Mattia-Colbertaldo/dopamine_restart
+```
+
+And remove the line that specified the network that we have used for our previous example because now we want to use our network
+
+Code:
+```ruby
+# DQNAgent.network = @gym_lib.CartpoleDQNNetwork
 ```
 
 # Third Step
