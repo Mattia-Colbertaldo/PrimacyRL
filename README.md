@@ -29,8 +29,9 @@ them off every once in a while, or the light won’t come in.”
 ![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/demo.png)
 
 # Enhancing Dopamine with Restart Functionality: A Step-by-Step Guide
+# Forward Last Layer Restart
 First, we add the restart to the last layer only. Below, we explain the steps forward in the Last Layer Restart process.
-# First Step: Forward Last Layer Restart"
+# First Step: Forward Last Layer Restart
 Since in the Colab Notebook we use:
 ```ruby
 DQNAgent.network = @gym_lib.CartpoleDQNNetwork
