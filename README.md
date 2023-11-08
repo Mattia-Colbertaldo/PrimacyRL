@@ -24,3 +24,32 @@ them off every once in a while, or the light won’t come in.”
 
 # Useful links
 * Dopamine Notebooks: https://github.com/google/dopamine/tree/master/dopamine/colab
+
+# Enhancing Dopamine with Restart Functionality: A Step-by-Step Guide
+
+# First Step
+In dopamine_restart/dopamine/discrete_domains/atari_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
+Code:
+  def reset_last_layer(self):
+        """Reset the last layer of the network."""
+        self.dense2 = tf.keras.layers.Dense(self.num_actions, name='fully_connected')
+        
+# Second Step     
+Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine
+Code:
+  !git clone https://github.com//Mattia-Colbertaldo/dopamine_restart
+
+# Third Step
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
+
+  def run_experiment(self):
+    ...
+      if iteration % 25 == 0:
+        self._agent.ResetLastLayers()
+    ...
+
+In this way we reset the last layers every 25 iterations.
+
+# Forth Step
+
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", 
