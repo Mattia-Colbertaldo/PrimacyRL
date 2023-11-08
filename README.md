@@ -31,13 +31,40 @@ them off every once in a while, or the light won’t come in.”
 # Enhancing Dopamine with Restart Functionality: A Step-by-Step Guide
 
 # First Step
-In dopamine_restart/dopamine/discrete_domains/atari_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
+Since in the Colab Notebook we use:
+```ruby
+DQNAgent.network = @gym_lib.CartpoleDQNNetwork
+```
+In https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/gym_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
 
 Code:
+In the class
+```ruby
+class CartpoleDQNNetwork(tf.keras.Model)
+```
+We added
 ```ruby
   def reset_last_layer(self):
-        """Reset the last layer of the network."""
-        self.dense2 = tf.keras.layers.Dense(self.num_actions, name='fully_connected')
+    self.net.reset_last_layer()
+```
+Where net is 
+```ruby
+self.net = BasicDiscreteDomainNetwork(CARTPOLE_MIN_VALS, CARTPOLE_MAX_VALS, num_actions)
+```
+And in the class
+```ruby
+class BasicDiscreteDomainNetwork(tf.keras.layers.Layer):
+```
+We added:
+```ruby
+  def reset_last_layer(self):
+    """Reset the last layer of the network."""
+    if self.num_atoms is None:
+      self.last_layer = tf.keras.layers.Dense(self.num_actions,
+                                              name='fully_connected')
+    else:
+      self.last_layer = tf.keras.layers.Dense(self.num_actions * self.num_atoms,
+                                              name='fully_connected')
 ```
         
 # Second Step     
@@ -48,12 +75,6 @@ Code:
   !git clone https://github.com//Mattia-Colbertaldo/dopamine_restart
 ```
 
-And remove the line that specified the network that we have used for our previous example because now we want to use our network
-
-Code:
-```ruby
-# DQNAgent.network = @gym_lib.CartpoleDQNNetwork
-```
 
 # Third Step
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
