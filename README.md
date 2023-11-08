@@ -29,6 +29,7 @@ them off every once in a while, or the light won’t come in.”
 
 # First Step
 In dopamine_restart/dopamine/discrete_domains/atari_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
+
 Code:
   def reset_last_layer(self):
         """Reset the last layer of the network."""
@@ -36,12 +37,14 @@ Code:
         
 # Second Step     
 Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine
+
 Code:
   !git clone https://github.com//Mattia-Colbertaldo/dopamine_restart
 
 # Third Step
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
 
+Code:
   def run_experiment(self):
     ...
       if iteration % 25 == 0:
@@ -52,4 +55,10 @@ In this way we reset the last layers every 25 iterations.
 
 # Forth Step
 
-In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", 
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", define ResetLastLayers: it calls reset_last_layer for both online_convnet and target_convnet networks
+
+Code:
+  def ResetLastLayers(self):
+    self.online_convnet.reset_last_layer()
+    self.target_convnet.reset_last_layer()
+    self._net_outputs = self.online_convnet(self.state_ph)
