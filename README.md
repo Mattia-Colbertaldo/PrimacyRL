@@ -25,7 +25,7 @@ them off every once in a while, or the light won’t come in.”
 # Useful links
 * Dopamine Notebooks: https://github.com/google/dopamine/tree/master/dopamine/colab
 
-# State-of-art result of Dopamine on the training of Cartpole over 100 itertations for 10 times
+# State-of-art result of Dopamine on the training of Cartpole over 100 iterations for 10 times
 ![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/demo.png)
 
 # Enhancing Dopamine with Restart Functionality: A Step-by-Step Guide
