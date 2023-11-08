@@ -29,8 +29,8 @@ them off every once in a while, or the light won’t come in.”
 ![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/demo.png)
 
 # Enhancing Dopamine with Restart Functionality: A Step-by-Step Guide
-
-# First Step
+First, we add the restart to the last layer only. Below, we explain the steps forward in the Last Layer Restart process.
+# First Step: Forward Last Layer Restart"
 Since in the Colab Notebook we use:
 ```ruby
 DQNAgent.network = @gym_lib.CartpoleDQNNetwork
@@ -67,7 +67,7 @@ We added:
                                               name='fully_connected')
 ```
         
-# Second Step     
+# Second Step: Forward Last Layer Restart    
 Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine:
 
 Code:
@@ -76,7 +76,7 @@ Code:
 ```
 
 
-# Third Step
+# Third Step: Forward Last Layer Restart
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
 
 Code:
@@ -90,7 +90,7 @@ Code:
 
 In this way we reset the last layers every 25 iterations.
 
-# Fourth Step
+# Fourth Step: Forward Last Layer Restart
 
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", define ResetLastLayers: it calls reset_last_layer for both online_convnet and target_convnet networks
 
