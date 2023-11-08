@@ -47,11 +47,13 @@ Code:
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
 
 Code:
+```ruby
   def run_experiment(self):
     ...
       if iteration % 25 == 0:
         self._agent.ResetLastLayers()
     ...
+```
 
 In this way we reset the last layers every 25 iterations.
 
@@ -60,7 +62,9 @@ In this way we reset the last layers every 25 iterations.
 In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", define ResetLastLayers: it calls reset_last_layer for both online_convnet and target_convnet networks
 
 Code:
+```ruby
   def ResetLastLayers(self):
     self.online_convnet.reset_last_layer()
     self.target_convnet.reset_last_layer()
     self._net_outputs = self.online_convnet(self.state_ph)
+```
