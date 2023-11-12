@@ -67,6 +67,11 @@ We added:
       self.last_layer = tf.keras.layers.Dense(self.num_actions * self.num_atoms,
                                               name='fully_connected')
 ```
+
+and in "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py#L439" we added to the method __init__:
+```ruby
+  self.online_convnet_state = self.online_convnet.get_weights()
+```
         
 # Second Step: Forward Last Layer Restart    
 Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine:
@@ -78,15 +83,24 @@ Code:
 
 
 # Third Step: Forward Last Layer Restart
-In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/run_experiment.py", add to the run_experiment definition:
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", add to the _train_step definition:
 
 Code:
 ```ruby
-  def run_experiment(self):
-    ...
-      if iteration % 25 == 0:
-        self._agent.ResetLastLayers()
-    ...
+ if self.training_steps % self.reset_period == 0:
+   print("Resetting last layers...")
+   self.ResetWeights()
+
+  ...
+
+  def ResetWeights(self):
+    #Reset the weights of the last layer
+    self.online_convnet.set_weights(self.online_convnet_state)
+    self.target_convnet.set_weights(self.online_convnet_state)
+    self._sess.run(tf.compat.v1.global_variables_initializer())
+    #Reset the optimizer state
+    optimizer_reset = tf.compat.v1.variables_initializer(self.optimizer_state)
+    self._sess.run(optimizer_reset)
 ```
 
 In this way we reset the last layers every 25 iterations.
