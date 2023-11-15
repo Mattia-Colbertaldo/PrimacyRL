@@ -38,35 +38,7 @@ DQNAgent.network = @gym_lib.CartpoleDQNNetwork
 ```
 In https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/gym_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
 
-Code:
-In the class
-```ruby
-class CartpoleDQNNetwork(tf.keras.Model)
-```
-We added
-```ruby
-  def reset_last_layer(self):
-    self.net.reset_last_layer()
-```
-Where net is 
-```ruby
-self.net = BasicDiscreteDomainNetwork(CARTPOLE_MIN_VALS, CARTPOLE_MAX_VALS, num_actions)
-```
-And in the class
-```ruby
-class BasicDiscreteDomainNetwork(tf.keras.layers.Layer):
-```
-We added:
-```ruby
-  def reset_last_layer(self):
-    """Reset the last layer of the network."""
-    if self.num_atoms is None:
-      self.last_layer = tf.keras.layers.Dense(self.num_actions,
-                                              name='fully_connected')
-    else:
-      self.last_layer = tf.keras.layers.Dense(self.num_actions * self.num_atoms,
-                                              name='fully_connected')
-```
+
 
 and in "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py#L439" we added to the method __init__:
 ```ruby
@@ -74,7 +46,7 @@ and in "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopam
 ```
         
 # Second Step: Forward Last Layer Restart    
-Change the colab so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine:
+Change the Colab Notebook so that clone our forked repo "https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/dopamine_prl.ipynb" in order to Install Dopamine:
 
 Code:
 ```ruby
@@ -93,26 +65,3 @@ Code:
 
   ...
 
-  def ResetWeights(self):
-    #Reset the weights of the last layer
-    self.online_convnet.set_weights(self.online_convnet_state)
-    self.target_convnet.set_weights(self.online_convnet_state)
-    self._sess.run(tf.compat.v1.global_variables_initializer())
-    #Reset the optimizer state
-    optimizer_reset = tf.compat.v1.variables_initializer(self.optimizer_state)
-    self._sess.run(optimizer_reset)
-```
-
-In this way we reset the last layers every 25 iterations.
-
-# Fourth Step: Forward Last Layer Restart
-
-In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", define ResetLastLayers: it calls reset_last_layer for both online_convnet and target_convnet networks
-
-Code:
-```ruby
-  def ResetLastLayers(self):
-    self.online_convnet.reset_last_layer()
-    self.target_convnet.reset_last_layer()
-    self._net_outputs = self.online_convnet(self.state_ph)
-```
