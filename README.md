@@ -76,3 +76,28 @@ In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/
     optimizer_reset = tf.compat.v1.variables_initializer(self.optimizer_state)
     self._sess.run(optimizer_reset)
 ```
+
+# Results
+ Our primary objective was to substantiate the hypothesis that incorporating
+the periodic resetting strategy enhances the overall score. 
+
+![Alt text]((https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/plot_2_both.png))
+This plot illustrates the outcomes when resetting all three layers
+at a frequency of 500 iterations with 100 evaluation steps. Notably, the mean scores showed a discernible improvement,
+supporting the efficacy of the resetting approach. 
+
+
+![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/plot_3_both.png)
+This plot presents results from resetting only the second
+and last layers, conducted every 200 iterations with 1000 evaluation steps. This configuration yielded very promising
+outcomes, further reinforcing the positive impact of periodic resetting on the DQN agent’s performance in the CartPole
+environment.
+
+Adding also the visualization of the variance we have:
+![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_01.png.png)
+![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_3.png.png)
+
+Legend meaning:
+DQN = no reset
+DQN + reset = reset all the layers
+DQN + reset 2 = reset only the last 2 the layers
