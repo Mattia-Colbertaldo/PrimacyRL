@@ -94,8 +94,9 @@ outcomes, further reinforcing the positive impact of periodic resetting on the D
 environment.
 
 Adding also the visualization of the variance we have:
-![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_01.png.png)
-![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_3.png.png)
+![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_01.png)
+
+![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_3.png)
 
 Legend meaning:
 DQN = no reset
