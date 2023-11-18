@@ -81,18 +81,25 @@ In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/
  Our primary objective was to substantiate the hypothesis that incorporating
 the periodic resetting strategy enhances the overall score. 
 
-![Alt text]((https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/plot_2_both.png))
+# Plot 1
+![Alt text]((https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/plot_2_both.png)
 This plot illustrates the outcomes when resetting all three layers
 at a frequency of 500 iterations with 100 evaluation steps. Notably, the mean scores showed a discernible improvement,
 supporting the efficacy of the resetting approach. 
 
 
+
+
+# Plot 2
 ![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/plot_3_both.png)
 This plot presents results from resetting only the second
 and last layers, conducted every 200 iterations with 1000 evaluation steps. This configuration yielded very promising
 outcomes, further reinforcing the positive impact of periodic resetting on the DQN agent’s performance in the CartPole
 environment.
 
+
+
+# Plot 3 & 4
 Adding also the visualization of the variance we have:
 ![Alt text](https://github.com/Mattia-Colbertaldo/PrimacyRL/blob/main/mixed_plot_01.png)
 
