@@ -36,11 +36,7 @@ Since in the Colab Notebook we use:
 ```ruby
 DQNAgent.network = @gym_lib.CartpoleDQNNetwork
 ```
-In https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/discrete_domains/gym_lib.py, we added "reset_last_layer" method which resets the last fully connected layer by simply creating it.
-
-
-
-and in "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py#L439" we added to the method __init__:
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py#L439" we added to the method __init__:
 ```ruby
   self.online_convnet_state = self.online_convnet.get_weights()
 ```
@@ -55,13 +51,28 @@ Code:
 
 
 # Third Step: Forward Last Layer Restart
-In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", add to the _train_step definition:
+In "https://github.com/Mattia-Colbertaldo/dopamine_restart/blob/master/dopamine/agents/dqn/dqn_agent.py", add to the ResetWeights method:
 
-Code:
 ```ruby
- if self.training_steps % self.reset_period == 0:
-   print("Resetting last layers...")
-   self.ResetWeights()
+  def ResetWeights(self):
 
-  ...
+    print("Resetting weights...")
+    if self.reset_last_layer:
+      print("Resetting last layer!")
+      self.online_convnet.layers[-1].last_layer.kernel.initializer.run(session=self._sess)
+      self.online_convnet.layers[-1].last_layer.bias.initializer.run(session=self._sess)
 
+    if self.reset_dense1:
+      print("Resetting dense1 layer!")
+      self.online_convnet.layers[-1].dense1.kernel.initializer.run(session=self._sess)
+      self.online_convnet.layers[-1].dense1.bias.initializer.run(session=self._sess)
+
+    if self.reset_dense2:
+      print("Resetting dense2 layer!")
+      self.online_convnet.layers[-1].dense2.kernel.initializer.run(session=self._sess)
+      self.online_convnet.layers[-1].dense2.bias.initializer.run(session=self._sess)
+
+    # Reset the optimizer state
+    optimizer_reset = tf.compat.v1.variables_initializer(self.optimizer_state)
+    self._sess.run(optimizer_reset)
+```
